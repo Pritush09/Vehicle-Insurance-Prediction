@@ -18,6 +18,7 @@ python-multipart
 uvicorn
 jinja2
 imblearn
+python-dotenv
 -e .
 # this hipen e dot help our package manager understand and work with local packages in src
 # so we dont get any error like package not found which is generally problematic
