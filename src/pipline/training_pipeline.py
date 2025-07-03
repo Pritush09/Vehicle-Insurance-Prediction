@@ -3,7 +3,7 @@ from src.exception import ApplicationException
 from src.logger import logger
 
 from src.components.data_ingestion import DataIngestion
-# from src.components.data_validation import DataValidation
+from src.components.data_validation import DataValidation
 # from src.components.data_transformation import DataTransformation
 # from src.components.model_trainer import ModelTrainer
 # from src.components.model_evaluation import ModelEvaluation
@@ -28,7 +28,7 @@ from src.entity.artifact_entity import (DataIngestionArtifact,
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
-        # self.data_validation_config = DataValidationConfig()
+        self.data_validation_config = DataValidationConfig()
         # self.data_transformation_config = DataTransformationConfig()
         # self.model_trainer_config = ModelTrainerConfig()
         # self.model_evaluation_config = ModelEvaluationConfig()
@@ -54,25 +54,25 @@ class TrainPipeline:
         except Exception as e:
             raise ApplicationException(e, sys.exc_info()) from e
         
-    # def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
-    #     """
-    #     This method of TrainPipeline class is responsible for starting data validation component
-    #     """
-    #     logger.info("Entered the start_data_validation method of TrainPipeline class")
+    def start_data_validation(self, data_ingestion_artifact: DataIngestionArtifact) -> DataValidationArtifact:
+        """
+        This method of TrainPipeline class is responsible for starting data validation component
+        """
+        logger.info("Entered the start_data_validation method of TrainPipeline class")
 
-    #     try:
-    #         data_validation = DataValidation(data_ingestion_artifact=data_ingestion_artifact,
-    #                                          data_validation_config=self.data_validation_config
-    #                                          )
+        try:
+            data_validation = DataValidation(data_ingestion_artifact=data_ingestion_artifact,
+                                             data_validation_config=self.data_validation_config
+                                             )
 
-    #         data_validation_artifact = data_validation.initiate_data_validation()
+            data_validation_artifact = data_validation.initiate_data_validation()
 
-    #         logger.info("Performed the data validation operation")
-    #         logger.info("Exited the start_data_validation method of TrainPipeline class")
+            logger.info("Performed the data validation operation")
+            logger.info("Exited the start_data_validation method of TrainPipeline class")
 
-    #         return data_validation_artifact
-    #     except Exception as e:
-    #         raise ApplicationException(e, sys.exc_info()) from e
+            return data_validation_artifact
+        except Exception as e:
+            raise ApplicationException(e, sys.exc_info()) from e
         
     # def start_data_transformation(self, data_ingestion_artifact: DataIngestionArtifact, data_validation_artifact: DataValidationArtifact) -> DataTransformationArtifact:
     #     """
@@ -134,7 +134,7 @@ class TrainPipeline:
         """
         try:
             data_ingestion_artifact = self.start_data_ingestion()
-            # data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
+            data_validation_artifact = self.start_data_validation(data_ingestion_artifact=data_ingestion_artifact)
             # data_transformation_artifact = self.start_data_transformation(
             #     data_ingestion_artifact=data_ingestion_artifact, data_validation_artifact=data_validation_artifact)
             # model_trainer_artifact = self.start_model_trainer(data_transformation_artifact=data_transformation_artifact)
