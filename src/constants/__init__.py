@@ -30,8 +30,8 @@ TEST_FILE_NAME: str = "test.csv"  # Name for the testing dataset file
 SCHEMA_FILE_PATH = os.path.join("config", "schema.yaml")  # Path to the data schema YAML file, defining expected data types and columns
 
 # AWS credentials and region
-AWS_ACCESS_KEY_ID_ENV_KEY = "AWS_ACCESS_KEY_ID"  # Environment variable name for AWS Access Key ID
-AWS_SECRET_ACCESS_KEY_ENV_KEY = "AWS_SECRET_ACCESS_KEY"  # Environment variable name for AWS Secret Access Key
+AWS_ACCESS_KEY_ID_ENV_KEY = os.getenv("AWS_ACCESS_KEY_ID")  # Environment variable name for AWS Access Key ID
+AWS_SECRET_ACCESS_KEY_ENV_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")  # Environment variable name for AWS Secret Access Key
 REGION_NAME = "us-east-1"  # AWS region to be used for services like S3
 
 """
@@ -75,7 +75,7 @@ MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101  # Seed used by the random number gene
 Model Evaluation related constants
 """
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02  # Threshold for significant change in model performance during evaluation
-MODEL_BUCKET_NAME = "my-model-mlopsproj"  # Name of the S3 bucket for storing models
+MODEL_BUCKET_NAME = "my-model-mlopsproj-insurance-db"  # Name of the S3 bucket for storing models
 MODEL_PUSHER_S3_KEY = "model-registry"  # Key (folder) within the S3 bucket for model registry
 
 # Application host and port for serving the model (e.g., with Flask or FastAPI)
